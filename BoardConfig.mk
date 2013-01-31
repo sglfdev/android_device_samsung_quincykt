@@ -1,4 +1,6 @@
-# Copyright (C) 2009 The CyanogenMod Project
+#
+# Copyright (C) 2013 The CyanogenMod Project
+# by Cholokei - leesl0416@naver.com
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,9 +21,10 @@
 # included in a build is to use PRODUCT_PACKAGES in a product
 # definition file).
 #
+USE_CAMERA_STUB := true
 
 # inherit from common msm8660
--include device/samsung/quincy-common/BoardConfigCommon.mk
+-include device/samsung/msm8660-common/BoardConfigCommon.mk
 
 # inherit from the proprietary version
 -include vendor/samsung/quincykt/BoardConfigVendor.mk
@@ -32,6 +35,10 @@ TARGET_BOOTLOADER_BOARD_NAME := quincykt
 TARGET_OTA_ASSERT_DEVICE := SHV-E160K,quincykt
 
 # Kernel
+BOARD_KERNEL_CMDLINE        := androidboot.hardware=qcom usb_id_pin_rework=true zcache
+BOARD_KERNEL_BASE           := 0x48000000
+BOARD_FORCE_RAMDISK_ADDRESS := 0x49400000
+BOARD_KERNEL_PAGESIZE       := 2048
 TARGET_KERNEL_SOURCE        := kernel/samsung/msm8660-common
 TARGET_KERNEL_CONFIG        := cyanogenmod_quincykt_defconfig
 
@@ -41,4 +48,18 @@ BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x00A00000
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1073741824
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 2147483648
 BOARD_FLASH_BLOCK_SIZE := 131072
+
+BOARD_SDCARD_DEVICE_PRIMARY := /dev/block/mmcblk1p1
+BOARD_SDCARD_DEVICE_SECONDARY := /dev/block/mmcblk0p29
+BOARD_SDEXT_DEVICE := /dev/block/mmcblk1p2
+BOARD_USES_MMCUTILS := true
+BOARD_HAS_NO_MISC_PARTITION := true
+BOARD_HAS_NO_SELECT_BUTTON := true
+BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_15x24.h\"
+
+# Q1 hardware has a rear mic for camcorder
+BOARD_HAVE_BACK_MIC_CAMCORDER := true
+
+# Disable initlogo, Samsungs framebuffer is weird
+TARGET_NO_INITLOGO := true
 
