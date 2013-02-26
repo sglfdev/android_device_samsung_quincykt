@@ -37,7 +37,8 @@ TARGET_OTA_ASSERT_DEVICE := SHV-E160K,quincykt
 # Kernel
 BOARD_KERNEL_CMDLINE        := androidboot.hardware=qcom usb_id_pin_rework=true zcache
 BOARD_KERNEL_BASE           := 0x48000000
-BOARD_FORCE_RAMDISK_ADDRESS := 0x49400000
+BOARD_MKBOOTIMG_ARGS        := --ramdisk_offset 0x01400000
+#BOARD_FORCE_RAMDISK_ADDRESS := 0x49400000
 BOARD_KERNEL_PAGESIZE       := 2048
 TARGET_KERNEL_SOURCE        := kernel/samsung/msm8660-common
 TARGET_KERNEL_CONFIG        := cyanogenmod_quincykt_defconfig
@@ -62,4 +63,6 @@ BOARD_HAVE_BACK_MIC_CAMCORDER := true
 
 # Disable initlogo, Samsungs framebuffer is weird
 TARGET_NO_INITLOGO := true
+
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/quincykt/bluetooth
 

@@ -36,13 +36,10 @@ PRODUCT_COPY_FILES += \
 
 # Ramdisk
 PRODUCT_COPY_FILES += \
+	device/samsung/dalikt/ramdisk/init.qcom.rc:root/init.qcom.rc \
 	device/samsung/quincykt/ramdisk/init.qcom.usb.rc:root/init.qcom.usb.rc \
-	device/samsung/quincykt/ramdisk/init.qcom.sh:root/init.qcom.sh \
-	device/samsung/quincykt/ramdisk/init.qcom.usb.sh:root/init.qcom.usb.sh \
 	device/samsung/quincykt/ramdisk/init.target.rc:root/init.target.rc \
 	device/samsung/quincykt/ramdisk/initlogo.rle:root/initlogo.rle \
-	device/samsung/quincykt/ramdisk/ueventd.rc:root/ueventd.rc \
-	device/samsung/quincykt/ramdisk/init.emmc.rc:root/init.emmc.rc \
 	device/samsung/quincykt/ramdisk/fstab.qcom:root/fstab.qcom
 
 # BT firmware

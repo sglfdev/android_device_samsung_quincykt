@@ -1,4 +1,6 @@
+#
 # system.prop for SHV-E160K
+# by Cholokei (Green) - leesl0416@naver.com
 #
 
 rild.libpath=/system/lib/libril-qc-qmi-1.so
