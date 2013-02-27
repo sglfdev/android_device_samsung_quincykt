@@ -36,7 +36,7 @@ PRODUCT_COPY_FILES += \
 
 # Ramdisk
 PRODUCT_COPY_FILES += \
-	device/samsung/dalikt/ramdisk/init.qcom.rc:root/init.qcom.rc \
+	device/samsung/quincykt/ramdisk/init.qcom.rc:root/init.qcom.rc \
 	device/samsung/quincykt/ramdisk/init.qcom.usb.rc:root/init.qcom.usb.rc \
 	device/samsung/quincykt/ramdisk/init.target.rc:root/init.target.rc \
 	device/samsung/quincykt/ramdisk/initlogo.rle:root/initlogo.rle \
