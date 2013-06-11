@@ -58,6 +58,9 @@ BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_15x24.h\"
 
+# For KOR Q1 vold
+BOARD_VOLD_KOR_QUINCY := true
+
 # Q1 hardware has a rear mic for camcorder
 BOARD_HAVE_BACK_MIC_CAMCORDER := true
 
