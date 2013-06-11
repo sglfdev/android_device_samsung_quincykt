@@ -107,9 +107,13 @@ on boot
     #Remove SUID bit for iproute2 ip tool
     chmod 0755 /system/bin/ip
 
-    #port-bridge
-    chmod 0660 /dev/smd0
-    chown system system /dev/smd0
+    # Dummy command to open() /dev/smd0 and not attempt to read any bytes from it
+    #
+    # This causes smd_tty_open() in arch/arm/mach-msm/smd_tty.c to load
+    # the modem firmware early. This is necessary to avoid a race condition
+    # where in-call audio dies if a phone call is made before initialization
+    # has finished.
+    exec /system/xbin/busybox dd if=/dev/smd0 of=/dev/null bs=1 count=1 skip=1
 
     chmod 0444 /sys/devices/platform/msm_hsusb/gadget/usb_state
 
@@ -121,8 +125,14 @@ on boot
     chmod 0664 /sys/devices/virtual/graphics/fb1/video_mode
     chmod 0664 /sys/devices/virtual/graphics/fb1/format_3d
 
-    # Change owner and group for media server and surface flinger
-    chown system system /sys/devices/virtual/graphics/fb1/format_3d
+    #HDMID Permission for sys nodes
+    chown system graphics /sys/class/graphics/fb1/connected
+    chown system graphics /sys/class/graphics/fb1/edid_modes
+    chown system graphics /sys/class/graphics/fb1/power_state
+    chown system graphics /sys/class/graphics/fb1/hpd
+    chown system graphics /sys/class/graphics/fb1/hdcp_present
+    chown system graphics /sys/class/graphics/fb1/hdmi_mode
+    chmod 0660 /sys/class/graphics/fb1/power_state
 	
 	#increase dirty_writeback_interval
     write /proc/sys/vm/dirty_writeback_centisecs 60000
@@ -264,7 +274,7 @@ on property:ro.boot.emmc=true
 service bridgemgrd /system/bin/bridgemgrd
     class late_start
     user radio
-    group radio
+    group radio qcom_diag
     disabled
 
 service port-bridge /system/bin/port-bridge /dev/smd0 /dev/ttyGS0
@@ -278,19 +288,20 @@ on property:ro.baseband="msm"
     # setprop ro.qualcomm.bluetooth.dun true
 
 service qmiproxy /system/bin/qmiproxy
-    class late_start
+    class main
     user radio
-    group radio
+    group radio qcom_diag
     disabled
 
+# QMUX must be in multiple groups to support external process connections
 service qmuxd /system/bin/qmuxd
-    class late_start
-    user root
-    group radio
+    class main
+    user radio
+    group radio audio bluetooth gps qcom_diag
     disabled
 
 service netmgrd /system/bin/netmgrd
-    class late_start
+    class main
     disabled
 
 service sensors /system/bin/sensors.qcom
@@ -455,25 +466,6 @@ on property:init.svc.bootanim=stopped
 on property:sys.boot_completed=1
     start qcom-post-boot
 
-service hdmid /system/bin/hdmid
-    class late_start
-	user system
-    group system graphics
-	socket hdmid stream 0660 system system
-    disabled
-
-on property:ro.hdmi.enable=true
-    start hdmid
-
-#HDMID Permission for sys nodes
-chown system graphics /sys/class/graphics/fb1/connected
-chown system graphics /sys/class/graphics/fb1/edid_modes
-chown system graphics /sys/class/graphics/fb1/power_state
-chown system graphics /sys/class/graphics/fb1/hpd
-chown system graphics /sys/class/graphics/fb1/hdcp_present
-chown system graphics /sys/class/graphics/fb1/hdmi_mode
-chmod 0660 /sys/class/graphics/fb1/power_state
-
 #service abld /system/bin/mm-abl-daemon
 #    class late_start
 #    disabled
@@ -511,12 +503,12 @@ on property:persist.timed.enable=true
     start time_daemon
 
 service ril-daemon1 /system/bin/rild -c 1
-    class late_start
+    class main
     socket rild1 stream 660 root radio
     socket rild-debug1 stream 660 radio system
     user root
     disabled
-    group radio cache inet misc audio sdcard_rw qcom_oncrpc diag
+    group radio cache inet misc audio sdcard_rw qcom_oncrpc diag qcom_diag log
 
 service profiler_daemon /system/bin/profiler_daemon
     class late_start

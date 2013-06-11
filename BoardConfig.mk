@@ -21,6 +21,10 @@
 # included in a build is to use PRODUCT_PACKAGES in a product
 # definition file).
 #
+
+# WARNING: This line must come *before* including the proprietary
+# variant, so that it gets overwritten by the parent (which goes
+# against the traditional rules of inheritance).
 USE_CAMERA_STUB := true
 
 # inherit from common msm8660
@@ -29,7 +33,7 @@ USE_CAMERA_STUB := true
 # inherit from the proprietary version
 -include vendor/samsung/quincykt/BoardConfigVendor.mk
 
-TARGET_BOOTLOADER_BOARD_NAME := quincykt
+TARGET_BOOTLOADER_BOARD_NAME := MSM8660_SURF
 
 # Assert
 TARGET_OTA_ASSERT_DEVICE := SHV-E160K,quincykt

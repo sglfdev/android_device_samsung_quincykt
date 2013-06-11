@@ -40,11 +40,12 @@ PRODUCT_COPY_FILES += \
 	device/samsung/quincykt/ramdisk/init.qcom.usb.rc:root/init.qcom.usb.rc \
 	device/samsung/quincykt/ramdisk/init.target.rc:root/init.target.rc \
 	device/samsung/quincykt/ramdisk/initlogo.rle:root/initlogo.rle \
-	device/samsung/quincykt/ramdisk/fstab.qcom:root/fstab.qcom
+	device/samsung/quincykt/fstab.qcom:root/fstab.qcom
 
 # BT firmware
 PRODUCT_COPY_FILES += \
-    device/samsung/quincykt/firmware/bcm4330B1.hcd:system/etc/firmware/bcm4330B1.hcd
+    device/samsung/quincykt/firmware/bcm4330B1.hcd:system/etc/firmware/bcm4330B1.hcd \
+    device/samsung/quincykt/firmware/bcm4330B1.hcd:system/bin/bcm4330B1.hcd
 
 # S-Pen IDC
 PRODUCT_COPY_FILES += \
