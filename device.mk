@@ -42,6 +42,9 @@ PRODUCT_COPY_FILES += \
 	device/samsung/quincykt/ramdisk/initlogo.rle:root/initlogo.rle \
 	device/samsung/quincykt/fstab.qcom:root/fstab.qcom
 
+# Do not use common init.qcom.rc code
+NO_COMMON_INIT_QCOM_RC := true
+
 # BT firmware
 PRODUCT_COPY_FILES += \
     device/samsung/quincykt/firmware/bcm4330B1.hcd:system/etc/firmware/bcm4330B1.hcd \
