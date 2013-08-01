@@ -1,6 +1,6 @@
 #
 # system.prop for SHV-E160K
-# by Cholokei (Green) - leesl0416@naver.com
+# by Cholokei - leesl0416@naver.com
 #
 
 rild.libpath=/system/lib/libril-qc-qmi-1.so
@@ -24,9 +24,6 @@ media.stagefright.enable-http=true
 media.stagefright.enable-fma2dp=false
 media.stagefright.enable-aac=true
 media.stagefright.enable-qcp=true
-
-lpa.decode=true
-lpa.use-stagefright=true
 
 #
 # system props for the data modules
