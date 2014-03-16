@@ -18,6 +18,9 @@ ril.subscription.types=NV,RUIM
 
 dev.pm.dyn_samplingrate=1
 
+# Disable GC freed lines
+dalvik.vm.debug.alloc=0
+
 #system props for the MM modules
 media.stagefright.enable-player=true
 media.stagefright.enable-http=true
@@ -60,12 +63,14 @@ ro.ril.transmitpower=true
 #
 ro.telephony.call_ring.multiple=0
 
-ro.sf.lcd_density=320
-
 # Fields for custom RIL
 # MAX PROP NAME is 31 chars --|
 #ro.telephony.ril_class=SamsungQualcommUiccRIL
 telephony.lteOnGsmDevice=1
+
+# Change preferred network type to LTE/GSM/CDMA auto (PRL)
+ro.telephony.default_network=9
+ro.ril.def.preferred.network=9
 
 # System property for SIM
 persist.radio.apm_sim_not_pwdn=1

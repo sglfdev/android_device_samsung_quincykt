@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2013 The CyanogenMod Project
+# Copyright (C) 2012-2014 The CyanogenMod Project
 # by Cholokei - leesl0416@naver.com
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -42,7 +42,6 @@ TARGET_OTA_ASSERT_DEVICE := SHV-E160K,quincykt
 BOARD_KERNEL_CMDLINE        := androidboot.hardware=qcom usb_id_pin_rework=true zcache
 BOARD_KERNEL_BASE           := 0x48000000
 BOARD_MKBOOTIMG_ARGS        := --ramdisk_offset 0x01400000
-#BOARD_FORCE_RAMDISK_ADDRESS := 0x49400000
 BOARD_KERNEL_PAGESIZE       := 2048
 TARGET_KERNEL_SOURCE        := kernel/samsung/msm8660-common
 TARGET_KERNEL_CONFIG        := cyanogenmod_quincykt_defconfig
@@ -54,13 +53,17 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1073741824
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 2147483648
 BOARD_FLASH_BLOCK_SIZE := 131072
 
-BOARD_SDCARD_DEVICE_PRIMARY := /dev/block/mmcblk1p1
-BOARD_SDCARD_DEVICE_SECONDARY := /dev/block/mmcblk0p29
-BOARD_SDEXT_DEVICE := /dev/block/mmcblk1p2
-BOARD_USES_MMCUTILS := true
-BOARD_HAS_NO_MISC_PARTITION := true
+#BOARD_SDCARD_DEVICE_PRIMARY := /dev/block/mmcblk1p1
+#BOARD_SDCARD_DEVICE_SECONDARY := /dev/block/mmcblk0p29
+#BOARD_SDEXT_DEVICE := /dev/block/mmcblk1p2
+#BOARD_USES_MMCUTILS := true
+#BOARD_HAS_NO_MISC_PARTITION := true
+
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_15x24.h\"
+
+# Suppress the WIPE command since it can brick our EMMC
+BOARD_SUPPRESS_EMMC_WIPE := true
 
 # For KOR Q1 vold
 BOARD_VOLD_KOR_QUINCY := true

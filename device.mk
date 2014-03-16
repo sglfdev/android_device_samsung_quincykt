@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2013 The CyanogenMod Project
+# Copyright (C) 2012-2014 The CyanogenMod Project
 # by Cholokei - leesl0416@naver.com
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -34,16 +34,27 @@ PRODUCT_AAPT_PREF_CONFIG := xhdpi
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml 
 
+# Bootanimation
+TARGET_SCREEN_WIDTH := 800
+TARGET_SCREEN_HEIGHT := 1280
+
 # Ramdisk
 PRODUCT_COPY_FILES += \
 	device/samsung/quincykt/ramdisk/init.qcom.rc:root/init.qcom.rc \
 	device/samsung/quincykt/ramdisk/init.qcom.usb.rc:root/init.qcom.usb.rc \
 	device/samsung/quincykt/ramdisk/init.target.rc:root/init.target.rc \
 	device/samsung/quincykt/ramdisk/initlogo.rle:root/initlogo.rle \
-	device/samsung/quincykt/fstab.qcom:root/fstab.qcom
+	device/samsung/quincykt/ramdisk/fstab.qcom:root/fstab.qcom
 
 # Do not use common init.qcom.rc code
 NO_COMMON_INIT_QCOM_RC := true
+
+# Do not use common fstab.qcom code
+NO_COMMON_FSTAB_QCOM := true
+
+# Density property for 720x1280 HD panel
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.sf.lcd_density=320
 
 # BT firmware
 PRODUCT_COPY_FILES += \
@@ -54,10 +65,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/samsung/quincykt/idc/sec_e-pen.idc:system/usr/idc/sec_e-pen.idc \
     device/samsung/quincykt/idc/sec_touchscreen.idc:system/usr/idc/sec_touchscreen.idc    
-
-# Vold configuration
-PRODUCT_COPY_FILES += \
-    device/samsung/quincykt/vold.fstab:system/etc/vold.fstab
 
 # QRNGD
 PRODUCT_PACKAGES += qrngd
